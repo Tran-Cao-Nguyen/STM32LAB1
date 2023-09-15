@@ -91,7 +91,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  //EX1
   int red_status = 0;
   while (1)
   {
