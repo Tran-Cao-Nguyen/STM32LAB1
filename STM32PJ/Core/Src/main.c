@@ -94,7 +94,7 @@ int main(void)
   int count = 0;
   while (1)
   {
-	 if(count == 10)
+	 if(count >= 10)
 	 {
 		  count = 0;
 	 }
