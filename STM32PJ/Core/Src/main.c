@@ -154,7 +154,7 @@ int main(void)
 		  HAL_GPIO_WritePin(SEGMENT_F_GPIO_Port, SEGMENT_F_Pin, 0);
 		  HAL_GPIO_WritePin(SEGMENT_G_GPIO_Port, SEGMENT_G_Pin, 0);
 	  }
-	  if(numm == 6)
+	  if(num == 6)
 	  {
 		  HAL_GPIO_WritePin(SEGMENT_A_GPIO_Port, SEGMENT_A_Pin, 0);
 		  HAL_GPIO_WritePin(SEGMENT_B_GPIO_Port, SEGMENT_B_Pin, 1);
@@ -195,14 +195,57 @@ int main(void)
 		  HAL_GPIO_WritePin(SEGMENT_G_GPIO_Port, SEGMENT_G_Pin, 0);
 	  }
   }
-  while (1)
-  {
+  int count = 0;
+    while (1)
+    {
+  	 if(count == 10)
+  	 {
+  		  count = 0;
+  	 }
+  	display7SEG(count);
+  	 if(count == 0)
+  	 {
+  		 // cum den 1
+  		 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 0);
+  		 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
+  		 // cum den 2
+  		 HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, 0);
+  	 }
+  	 if(count == 3)
+  	 {
+  		 // cum den 2
+  		 HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, 0);
+  		 HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, 1);
+  	 }
+  	 if(count == 5)
+  	 {
+  		 // cum den 1
+  		 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
+  		 // cum den 2
+  		 HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, 0);
+  		 HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, 1);
+  	 }
+  	 if(count == 8)
+  	 {
+  		 // cum den 1
+  		 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 0);
+  		 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
+  	 }
+  	 count++;
+  	 HAL_Delay(1000);
 
+      /* USER CODE END WHILE */
 
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
+      /* USER CODE BEGIN 3 */
+    }
   /* USER CODE END 3 */
 }
 
