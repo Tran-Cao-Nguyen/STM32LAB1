@@ -174,6 +174,96 @@ void clearAllClock()
 		  HAL_GPIO_WritePin(LED_11_GPIO_Port, LED_11_Pin, 1);
 	 }
  }
+ // Toggle minute led
+ void ToggleLed(int num)
+ {
+	 if (num == 0)
+	 {
+		  HAL_GPIO_TogglePin(LED_0_GPIO_Port, LED_0_Pin);
+	 }
+	 if (num == 1)
+	 {
+		  HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+	 }
+	 if (num == 2)
+	 {
+		  HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
+	 }
+	 if (num == 3)
+	 {
+		  HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
+	 }
+	 if (num == 4)
+	 {
+		  HAL_GPIO_TogglePin(LED_4_GPIO_Port, LED_4_Pin);
+	 }
+	 if (num == 5)
+	 {
+		  HAL_GPIO_TogglePin(LED_5_GPIO_Port, LED_5_Pin);
+	 }
+	 if (num == 6)
+	 {
+		  HAL_GPIO_TogglePin(LED_6_GPIO_Port, LED_6_Pin);
+	 }
+	 if (num == 7)
+	 {
+		  HAL_GPIO_TogglePin(LED_7_GPIO_Port, LED_7_Pin);
+	 }
+	 if (num == 8)
+	 {
+		  HAL_GPIO_TogglePin(LED_8_GPIO_Port, LED_8_Pin);
+	 }
+	 if (num == 9)
+	 {
+		  HAL_GPIO_TogglePin(LED_9_GPIO_Port, LED_9_Pin);
+	 }
+	 if (num == 10)
+	 {
+		  HAL_GPIO_TogglePin(LED_10_GPIO_Port, LED_10_Pin);
+	 }
+	 if (num == 11)
+	 {
+		  HAL_GPIO_TogglePin(LED_11_GPIO_Port, LED_11_Pin);
+	 }
+ }
+ //DISPLAY
+ 	 void display(int hours, int minutes, int seconds)
+ 	 {
+ 		 // set hour
+ 		 setNumberOnClock(hours);
+ 		 if (hours != 0 && minutes/5 != hours - 1 && seconds/5 != hours - 1)
+ 		 {
+ 	 		 clearNumberOnClock(hours - 1);
+ 		 }
+ 		 if (hours == 0 && minutes/5 != 11 && seconds/5 != 11)
+ 		 {
+ 			 clearNumberOnClock(11);
+ 		 }
+ 		 // set minutes
+ 		 if (minutes/5 != hours && minutes/5 != seconds/5)
+ 		 {
+ 	 		ToggleLed(minutes / 5);
+ 		 }
+
+ 		 if (minutes / 5 != 0 && hours != minutes/5 - 1 && seconds/5 != minutes/5 - 1)
+ 		 {
+ 			 clearNumberOnClock(minutes / 5 - 1);
+ 		 }
+ 		 if (minutes / 5 == 0 && hours != 11 && seconds/5 != 11)
+ 		 {
+ 			 clearNumberOnClock(11);
+ 		 }
+ 		 // set second
+ 		 setNumberOnClock(seconds / 5);
+ 		 if (seconds / 5 != 0 && hours != seconds/5 - 1 && minutes/5 != seconds/5 - 1)
+ 		 {
+ 			 clearNumberOnClock(seconds / 5 - 1);
+ 		 }
+ 		 if (seconds / 5 == 0 && hours != 11 && minutes/5 != 11)
+ 		 {
+ 			 clearNumberOnClock(11);
+ 		 }
+ 	 }
 /* USER CODE END 0 */
 
 /**
@@ -211,18 +301,31 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int count = 0;
+  int hours = 0;
+  int minutes = 0;
+  int seconds = 0;
+  clearAllClock();
 
   while (1)
   {
 	  	// set rule of clock
-	  	if (count == 12)
-	  	{
-	  		count = 0;
-	  	}
-	  	clearNumberOnClock(count);
-	  	count++;
-	  	HAL_Delay(1000);
+	  if (seconds >= 60)
+	  {
+	  	  	minutes++;
+	  	  	seconds = 0;
+	  }
+	  if (minutes >= 60)
+	  {
+	  	  hours++;
+	  	  minutes = 0;
+	  }
+	  if (hours >= 12)
+	  {
+	  	  hours = 0;
+	  }
+	  display(hours, minutes, seconds);
+	  seconds++;
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
