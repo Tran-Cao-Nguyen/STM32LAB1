@@ -359,8 +359,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-    while (1)
-    {
+while (1)
+{
     	display7SEG(light1);
     	display7SEG2(light2);
     	light1--;
