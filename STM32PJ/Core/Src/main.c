@@ -202,7 +202,7 @@ int main(void)
   	 {
   		  count = 0;
   	 }
-  	display7SEG(count);
+  	 display7SEG(count);
   	 if(count == 0)
   	 {
   		 // cum den 1
